@@ -1,19 +1,26 @@
-import photoContent from "../images/download.jpeg";
 import star from "../images/star.png";
+import content from "../images/download.jpeg";
 
-const Card = () => {
+const Card = (props) => {
+  let badgeText;
+  if (props.openSpots === 0) {
+    badgeText = "SOLD OUT";
+  } else if (props.location === "Online") {
+    badgeText = "ONLINE";
+  }
   return (
     <div className="card">
-      <img src={photoContent} className="card--image" alt="content" />
+      {badgeText && <div className="card--badge">{badgeText}</div>}
+      {/* <img src={content} className="card--image" alt="content" /> */}
       <div className="card--stats">
-        <img src={star} alt="star" className="card--star" />
-        <span>5.0</span>
-        <span className="gray">(6) • </span>
-        <span className="gray">USA</span>
+        {/* <img src={star} alt="star" className="card--star" /> */}
+        <span>{props.stats.rating}</span>
+        <span className="gray">({props.stats.reviewCount}) • </span>
+        <span className="gray">{props.location}</span>
       </div>
-      <p>Life Lessons with Katie Zaferes</p>
+      <p>{props.title}</p>
       <p>
-        <span className="bold">From $136</span> / person
+        <span className="bold">From ${props.price}</span> / person
       </p>
     </div>
   );
